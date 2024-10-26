@@ -21,9 +21,9 @@ export class PizzaService {
     return this.http.post<Pizza>(this.apiURL, pizza)
   }
   updatePizza(id: number, pizza: Pizza): Observable<Pizza> {
-    return this.http.put<Pizza>(`${this.apiURL}/{id}`, pizza)
+    return this.http.put<Pizza>(`${this.apiURL}/${id}`, pizza)
   }
   deletePizza(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiURL}/{id}`)
+    return this.http.delete<void>(`${this.apiURL}/${id}`)
   }
 }

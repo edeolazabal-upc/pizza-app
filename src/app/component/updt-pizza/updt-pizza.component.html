@@ -1,1 +1,15 @@
-<p>updt-pizza works!</p>
+<form [formGroup]="pizzaForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <mat-select formControlName="nombre">
+        <mat-option *ngFor="let nombre of nombres" [value]="nombre">{{nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" formControlName="precio">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </form>
