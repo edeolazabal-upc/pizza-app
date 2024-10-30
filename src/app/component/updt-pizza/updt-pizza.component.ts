@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { PizzaService } from '../../service/pizza.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Pizza } from '../../model/pizza';
 
 @Component({
   selector: 'app-updt-pizza',
@@ -26,6 +27,7 @@ export class UpdtPizzaComponent implements OnInit {
   pizzaForm: FormGroup
   id: number | null = null
   nombres = ['napolitana', 'margarita', 'peruana']
+  pizza: Pizza | undefined
 
   constructor (
     private fb: FormBuilder,
@@ -52,6 +54,13 @@ export class UpdtPizzaComponent implements OnInit {
       ])
     })
   }
+  get nombre() {
+    return this.pizzaForm.get('nombre')
+  }
+  get precio() {
+    return this.pizzaForm.get('precio')
+  }
+
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!
     if (this.id) {
@@ -66,13 +75,20 @@ export class UpdtPizzaComponent implements OnInit {
   }
   onSubmit(): void {
     if (this.pizzaForm.valid) {
+      this.pizza = {
+        id: this.id || 0,
+        nombre: this.nombre?.value || '', 
+        precio: this.precio?.value || 0,
+      }
       if (this.id) {
-        this.pizzaService.updatePizza(this.id, this.pizzaForm.value).subscribe(() => {
-          this.router.navigate(['/list-pizzas'])
+        //this.pizzaService.updatePizza(this.id, this.pizzaForm.value).subscribe(() => {
+            this.pizzaService.updatePizza(this.id, this.pizza).subscribe(() => {
+            this.router.navigate(['/list-pizzas'])
         })
       } else {
-        this.pizzaService.addPizza(this.pizzaForm.value).subscribe(() => {
-          this.router.navigate(['/list-pizzas'])
+//      this.pizzaService.addPizza(this.pizzaForm.value).subscribe(() => {
+        this.pizzaService.addPizza(this.pizza).subscribe(() => {
+        this.router.navigate(['/list-pizzas'])
         })
       }
       

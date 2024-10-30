@@ -3,14 +3,7 @@
     {
       "id": "1",
       "nombre": "napolitana",
-      "precio": 25
-    },
-    {
-      "nombre": "margarita",
-      "nombre_opcional": "dato ok",
-      "correo_opcional": "persona@gmail.com",
-      "precio": 18,
-      "id": "2"
+      "precio": 25.5
     },
     {
       "id": "637c",
@@ -20,8 +13,17 @@
     {
       "id": "1042",
       "nombre": "peruana",
-      "nombre_opcional": "dato ok",
       "precio": 12
+    },
+    {
+      "id": null,
+      "nombre": "margarita",
+      "precio": 16.5
+    },
+    {
+      "id": 0,
+      "nombre": "napolitana",
+      "precio": 15.5
     }
   ]
 }
