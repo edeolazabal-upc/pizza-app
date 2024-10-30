@@ -7,9 +7,51 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Nombre opcional</mat-label>
+      <input matInput type="text" formControlName="nombre_opcional">
+    </mat-form-field>
+    <mat-error
+    *ngIf="pizzaForm.get('nombre_opcional')?.hasError('required')">
+        El nombre opcional es un campo <strong>obligatorio</strong>
+  </mat-error>
+  <mat-error
+  *ngIf="pizzaForm.get('nombre_opcional')?.hasError('minlength')">
+      El nombre opcional debe tener como minimo <strong>5 caracteres</strong>
+  </mat-error>
+  <mat-error
+  *ngIf="pizzaForm.get('nombre_opcional')?.hasError('maxlength')">
+      El nombre opcional debe tener como máximo <strong>10 caracteres</strong>
+  </mat-error>
+
+  <mat-form-field>
+    <mat-label>Correo opcional</mat-label>
+    <input matInput type="email" formControlName="correo_opcional">
+  </mat-form-field>
+  <mat-error
+  *ngIf="pizzaForm.get('correo_opcional')?.hasError('required')">
+      El correo opcional es un campo <strong>obligatorio</strong>
+</mat-error>
+<mat-error
+*ngIf="pizzaForm.get('correo_opcional')?.hasError('email')">
+    El correo opcional debe tener formato de  <strong>email</strong>
+</mat-error>
+
+    <mat-form-field>
       <mat-label>Precio</mat-label>
       <input matInput type="number" formControlName="precio">
     </mat-form-field>
+    <mat-error
+      *ngIf="pizzaForm.get('precio')?.hasError('required')">
+          El precio es un campo <strong>obligatorio</strong>
+  </mat-error>
+    <mat-error
+      *ngIf="pizzaForm.get('precio')?.hasError('min')">
+            El precio minimo debe ser <strong>0.1</strong>
+    </mat-error>
+    <mat-error
+      *ngIf="pizzaForm.get('precio')?.hasError('max')">
+          El precio no debe exceder los <strong>100</strong>
+  </mat-error>
 
-    <button mat-raised-button color="primary" type="submit">Guardar</button>
+    <button mat-raised-button color="primary" type="submit"  [disabled]="pizzaForm.invalid">Guardar</button>
   </form>

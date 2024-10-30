@@ -7,13 +7,21 @@
     },
     {
       "nombre": "margarita",
-      "precio": 23,
+      "nombre_opcional": "dato ok",
+      "correo_opcional": "persona@gmail.com",
+      "precio": 18,
       "id": "2"
     },
     {
       "id": "637c",
       "nombre": "peruana",
       "precio": 20
+    },
+    {
+      "id": "1042",
+      "nombre": "peruana",
+      "nombre_opcional": "dato ok",
+      "precio": 12
     }
   ]
 }

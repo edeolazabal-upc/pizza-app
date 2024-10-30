@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -35,14 +35,32 @@ export class UpdtPizzaComponent implements OnInit {
   ) {
     this.pizzaForm = this.fb.group({
       nombre: [''],
-      precio: ['']
+      // precio: ['', Validators.required]
+      nombre_opcional: new FormControl ('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(10)
+      ]),
+      correo_opcional: new FormControl ('', [
+        Validators.required,
+        Validators.email
+      ]),
+      precio: new FormControl ('', [
+        Validators.required,
+        Validators.min(0.1),
+        Validators.max(100)
+      ])
     })
   }
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!
     if (this.id) {
       this.pizzaService.getPizza(this.id).subscribe(pizza => {
-        this.pizzaForm.patchValue(pizza)
+       // this.pizzaForm.patchValue(pizza)
+        this.pizzaForm.get('nombre')?.setValue(pizza.nombre)
+        this.pizzaForm.get('nombre_opcional')?.setValue('')
+        this.pizzaForm.get('correo_opcional')?.setValue('nnn@xxx.yyy')
+        this.pizzaForm.get('precio')?.setValue(pizza.precio)
       })
     }
   }
