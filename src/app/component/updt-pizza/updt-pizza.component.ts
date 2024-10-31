@@ -27,7 +27,7 @@ export class UpdtPizzaComponent implements OnInit {
   pizzaForm: FormGroup
   id: number | null = null
   nombres = ['napolitana', 'margarita', 'peruana']
-  pizza: Pizza | undefined
+//  pizza: Pizza | undefined
 
   constructor (
     private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class UpdtPizzaComponent implements OnInit {
     this.pizzaForm = this.fb.group({
       nombre: [''],
       // precio: ['', Validators.required]
-      nombre_opcional: new FormControl ('', [
+/*      nombre_opcional: new FormControl ('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10)
@@ -46,7 +46,7 @@ export class UpdtPizzaComponent implements OnInit {
       correo_opcional: new FormControl ('', [
         Validators.required,
         Validators.email
-      ]),
+      ]),  */
       precio: new FormControl ('', [
         Validators.required,
         Validators.min(0.1),
@@ -54,40 +54,40 @@ export class UpdtPizzaComponent implements OnInit {
       ])
     })
   }
-  get nombre() {
+/*  get nombre() {
     return this.pizzaForm.get('nombre')
   }
   get precio() {
     return this.pizzaForm.get('precio')
   }
-
+*/
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!
     if (this.id) {
       this.pizzaService.getPizza(this.id).subscribe(pizza => {
        // this.pizzaForm.patchValue(pizza)
         this.pizzaForm.get('nombre')?.setValue(pizza.nombre)
-        this.pizzaForm.get('nombre_opcional')?.setValue('')
-        this.pizzaForm.get('correo_opcional')?.setValue('nnn@xxx.yyy')
+//        this.pizzaForm.get('nombre_opcional')?.setValue('')
+//        this.pizzaForm.get('correo_opcional')?.setValue('nnn@xxx.yyy')
         this.pizzaForm.get('precio')?.setValue(pizza.precio)
       })
     }
   }
   onSubmit(): void {
     if (this.pizzaForm.valid) {
-      this.pizza = {
-        id: this.id || 0,
-        nombre: this.nombre?.value || '', 
-        precio: this.precio?.value || 0,
+//      this.pizza = {
+//        id: this.id || 0,
+//        nombre: this.nombre?.value || '', 
+//        precio: this.precio?.value || 0,
       }
       if (this.id) {
-        //this.pizzaService.updatePizza(this.id, this.pizzaForm.value).subscribe(() => {
-            this.pizzaService.updatePizza(this.id, this.pizza).subscribe(() => {
+            this.pizzaService.updatePizza(this.id, this.pizzaForm.value).subscribe(() => {
+ //           this.pizzaService.updatePizza(this.id, this.pizza).subscribe(() => {
             this.router.navigate(['/list-pizzas'])
         })
       } else {
-//      this.pizzaService.addPizza(this.pizzaForm.value).subscribe(() => {
-        this.pizzaService.addPizza(this.pizza).subscribe(() => {
+          this.pizzaService.addPizza(this.pizzaForm.value).subscribe(() => {
+//        this.pizzaService.addPizza(this.pizza).subscribe(() => {
         this.router.navigate(['/list-pizzas'])
         })
       }
@@ -95,4 +95,4 @@ export class UpdtPizzaComponent implements OnInit {
     }
   }
 
-}
+

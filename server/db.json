@@ -21,9 +21,19 @@
       "precio": 16.5
     },
     {
-      "id": 0,
+      "id": "0",
       "nombre": "napolitana",
       "precio": 15.5
+    },
+    {
+      "id": "7ba6",
+      "nombre": "margarita",
+      "precio": 22
+    },
+    {
+      "id": "4dd5",
+      "nombre": "napolitana",
+      "precio": 11
     }
   ]
 }
